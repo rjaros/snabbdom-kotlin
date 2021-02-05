@@ -8,7 +8,7 @@ https://github.com/snabbdom/snabbdom
 
 The definition files here are based on snabbdom v0.7.4.
 
-This project is built with Gradle 6.6.
+This project is built with Gradle 6.8.
 
 The typescript definition files in the `/snabbdom.d.ts` folder are copied from the snabbdom v0.6.9 release on npm and then run through the `ts2kt tool` (https://github.com/Kotlin/ts2kt).
 The output from the `ts2kt tool` is in the `/snabbdom.d.ts/generated` folder.
@@ -17,24 +17,12 @@ The files under the `src` folder are the same output files but modified so that 
 
 ### How to use
 
-The releases of this project are available from bintray.
+The artifacts of this project are published to Maven Central.
 To use it in your project add the following code in your build.gradle.kts file.
 
-    repositories {
-        ...
-        maven { url = uri("https://dl.bintray.com/gbaldeck/kotlin") }
-    }
-
     dependencies {
         ...
-        api("com.github.snabbdom:snabbdom-kotlin:$snabbdomKotlinVersion")
-    }
-    
-Don't forget to include Snabbdom in your project.
-
-    dependencies {
-        ...
-        implementation(npm("snabbdom", "^0.7.4"))
+        api("io.kvision:snabbdom-kotlin:$snabbdomKotlinVersion")
     }
 
 To see this library being used in a project check out KVision (https://github.com/rjaros/kvision).

@@ -1,15 +1,11 @@
 plugins {
     kotlin("js")
     id("maven-publish")
+    id("signing")
 }
 
 repositories {
     mavenCentral()
-    jcenter()
-    maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
-    maven { url = uri("https://kotlin.bintray.com/kotlinx") }
-    maven { url = uri("https://dl.bintray.com/kotlin/kotlin-js-wrappers") }
-    maven { url = uri("https://dl.bintray.com/rjaros/kotlin") }
     mavenLocal()
 }
 
@@ -54,4 +50,5 @@ publishing {
     }
 }
 
+setupSigning()
 setupPublication()

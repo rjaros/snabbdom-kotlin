@@ -4,11 +4,12 @@ import org.gradle.api.publish.maven.MavenPom
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.withType
+import org.gradle.plugins.signing.SigningExtension
 
 fun MavenPom.defaultPom() {
     name.set("snabbdom-kotlin")
     description.set("Kotlin definition files for the Snabbdom virtual DOM library.")
-    url.set("https://github.com/gbaldeck/snabbdom-kotlin")
+    url.set("https://github.com/rjaros/snabbdom-kotlin")
     licenses {
         license {
             name.set("MIT")
@@ -22,9 +23,15 @@ fun MavenPom.defaultPom() {
         }
     }
     scm {
-        url.set("https://github.com/gbaldeck/snabbdom-kotlin.git")
-        connection.set("scm:git:git://github.com/gbaldeck/snabbdom-kotlin.git")
-        developerConnection.set("scm:git:git://github.com/gbaldeck/snabbdom-kotlin.git")
+        url.set("https://github.com/rjaros/snabbdom-kotlin.git")
+        connection.set("scm:git:git://github.com/rjaros/snabbdom-kotlin.git")
+        developerConnection.set("scm:git:git://github.com/rjaros/snabbdom-kotlin.git")
+    }
+}
+
+fun Project.setupSigning() {
+    extensions.getByType<SigningExtension>().run {
+        sign(extensions.getByType<PublishingExtension>().publications)
     }
 }
 
@@ -40,10 +47,10 @@ fun Project.setupPublication() {
 
         repositories {
             maven {
-                url = uri("https://api.bintray.com/maven/rjaros/kotlin/${project.name}/;publish=0;override=1")
+                url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
                 credentials {
-                    username = findProperty("buser")?.toString()
-                    password = findProperty("bkey")?.toString()
+                    username = findProperty("ossrhUsername")?.toString()
+                    password = findProperty("ossrhPassword")?.toString()
                 }
             }
         }
